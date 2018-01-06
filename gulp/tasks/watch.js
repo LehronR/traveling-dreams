@@ -14,13 +14,20 @@ gulp.task('watch', function() {
         browserSync.reload(); 
     });
 
-    watch('./**/**/*.css', function() {
+    watch('./app/assets/styles/**/*.css', function() {
         gulp.start('cssInject');
     });
-    
+
+    watch('./app/assets/Scripts/**/*.js', function() {
+        gulp.start('scriptsRefresh');
+    });
 });
 
 gulp.task('cssInject', ['styles'], function() {
     return gulp.src('./app/assets/styles/styles.css')
     .pipe(browserSync.stream());
+});
+
+gulp.task('scriptsRefresh', ['scripts'], function() {
+    browserSync.reload();
 });
